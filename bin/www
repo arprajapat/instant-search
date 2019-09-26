@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('instant-search:server');
 var http = require('http');
+const init = require('../init');
 
 /**
  * Get port from environment and store in Express.
@@ -24,10 +25,15 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+init().then(function() {
+  console.log("init done");
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+}, function() {
+  console.log("data caching failed")
+  process.exit(1);
+})
 
 /**
  * Normalize a port into a number, string, or false.
@@ -87,4 +93,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log(`Example app listening on port ${bind}!`)
 }
