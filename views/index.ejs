@@ -3,9 +3,30 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' />
+
+    <script src="/javascripts/app.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <form>
+      <div class="form-group">
+        <label for="text_search">Search Name</label>
+        <input type="text" class="form-control" id="text_search" placeholder="enter text to search" onkeyup="onKeyUp(this)">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">score</th>
+        </tr>
+      </thead>
+      <tbody id = 'search_result_list'>
+      </tbody>
+    </table>
   </body>
 </html>

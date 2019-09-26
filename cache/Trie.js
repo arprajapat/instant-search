@@ -11,8 +11,11 @@ class TrieNode {
         this.map = new Map();
     }
     addToSet (id, score) {
-        if(score > 0)  // make searchable only if score > 0
-            this.map.set(id, score);
+        if(score > 0) { // make searchable only if score > 0 
+            const max = Math.max(score, this.map.has(id) ? this.map.get(id) : 0 )
+            this.map.set(id, max);
+        }
+        // console.log(id, score)
     }
     getIds () {
         return Array.from(this.map);
